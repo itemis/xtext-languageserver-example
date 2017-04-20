@@ -5,6 +5,7 @@ buildscript {
 	dependencies {
 		classpath 'org.xtext:xtext-gradle-plugin:1.0.15'
 		classpath 'com.moowork.gradle:gradle-node-plugin:0.13'
+		classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.2'
 	}
 }
 
@@ -44,7 +45,7 @@ configure(subprojects.findAll { it.name.startsWith('org.xtext') }) {
 	apply plugin: 'idea'
 	
 	group = 'org.xtext.example.mydsl'
-	version = '1.0.0-SNAPSHOT'
+	version = rootProject.version
 	
 	sourceCompatibility = '1.8'
 	targetCompatibility = '1.8'

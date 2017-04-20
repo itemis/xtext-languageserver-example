@@ -1,11 +1,47 @@
 //see https://docs.gradle.org/current/userguide/maven_plugin.html
 apply plugin: 'maven'
+apply plugin: 'com.jfrog.bintray'
 
 uploadArchives {
 	repositories {
 		mavenDeployer {
 			repository(url: "file://${buildDir}/localRepo")
 			snapshotRepository(url: "file://${buildDir}/localRepo")
+		}
+	}
+}
+
+// define custom configuration for bintray upload to avoid uploading the shadow JARs
+configurations {
+	bintrayArtifacts
+}
+
+artifacts {
+	bintrayArtifacts jar
+	bintrayArtifacts sourcesJar
+}
+
+bintray {
+	user = System.getenv('BINTRAY_USER')
+	key = System.getenv('BINTRAY_KEY')
+	configurations = ['bintrayArtifacts']
+	publish = true
+	pkg {
+		repo = 'examples'
+		name = 'xtext-languageserver-example'
+		userOrg = 'itemis'
+		websiteUrl = 'https://github.com/itemis/xtext-languageserver-example'
+		issueTrackerUrl = 'https://github.com/itemis/xtext-languageserver-example/issues'
+		vcsUrl = 'https://github.com/itemis/xtext-languageserver-example.git'
+		licenses = ['EPL-1.0']
+		labels = ['xtext', 'vscode']
+
+		githubRepo = 'itemis/xtext-languageserver-example'
+		githubReleaseNotesFile = 'README.md'
+
+		version {
+			name = project.version
+			vcsTag = "v$project.version"
 		}
 	}
 }

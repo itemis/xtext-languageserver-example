@@ -1,7 +1,6 @@
 package org.xtext.example.mydsl.websockets
 
 import com.google.inject.Guice
-import com.google.inject.Injector
 import java.net.InetSocketAddress
 import javax.websocket.Endpoint
 import javax.websocket.server.ServerEndpointConfig
@@ -20,7 +19,7 @@ class ServerLauncher {
 	
 	def static void main(String[] args) {
 		
-		val rootPath = if (args.length >= 1) args.get(0) else '../..'
+		val rootPath = if (args.length >= 1) args.get(0) else '/data/git/monaco-languageclient/example/lib'
 		val launcher = new ServerLauncher(rootPath)
 		launcher.start()
 	}
@@ -35,7 +34,7 @@ class ServerLauncher {
 		val server = new Server(new InetSocketAddress(8080))
 		val webAppContext = new WebAppContext => [
 			//  https://github.com/TypeFox/monaco-languageclient/blob/master/example/src/client.ts
-			resourceBase = "/data/git/monaco-languageclient/example/lib"
+			resourceBase = rootPath
 			log.info('Serving client app from ' + resourceBase)
 			welcomeFiles = #['index.html']
 			setInitParameter('org.eclipse.jetty.servlet.Default.dirAllowed', 'false')
@@ -57,7 +56,6 @@ class ServerLauncher {
 		endpointConfigBuilder.configurator(new ServerEndpointConfig.Configurator {
 			override <T> getEndpointInstance(Class<T> endpointClass) throws InstantiationException {
 				val i = injector.getInstance(Endpoint) as T
-				println(i)
 				return i
 			}
 		})

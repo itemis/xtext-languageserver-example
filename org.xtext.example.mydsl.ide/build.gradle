@@ -4,7 +4,6 @@ dependencies {
 	implementation project(':org.xtext.example.mydsl')
 	implementation "org.eclipse.xtext:org.eclipse.xtext.ide:${xtextVersion}"
 	implementation "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:${xtextVersion}"
-	implementation "org.eclipse.lsp4j:org.eclipse.lsp4j:0.8.0"
 }
 
 // Add a start script for the socket case

@@ -1,11 +1,15 @@
 //see https://docs.gradle.org/current/userguide/maven_plugin.html
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
-uploadArchives {
-	repositories {
-		mavenDeployer {
-			repository(url: "file://${buildDir}/localRepo")
-			snapshotRepository(url: "file://${buildDir}/localRepo")
-		}
-	}
+publishing {
+    repositories {
+        maven {
+            url = "$rootProject.buildDir/localRepo"
+        }
+    }
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
 }

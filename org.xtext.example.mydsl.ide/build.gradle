@@ -1,9 +1,9 @@
 apply plugin: 'application'
 
 dependencies {
-	compile project(':org.xtext.example.mydsl')
-	compile "org.eclipse.xtext:org.eclipse.xtext.ide:${xtextVersion}"
-	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:${xtextVersion}"
+	implementation project(':org.xtext.example.mydsl')
+	implementation "org.eclipse.xtext:org.eclipse.xtext.ide:${xtextVersion}"
+	implementation "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:${xtextVersion}"
 }
 
 // Add a start script for the socket case
@@ -17,10 +17,11 @@ task standaloneStartScript(type: CreateStartScripts) {
 	mainClassName = 'org.eclipse.xtext.ide.server.ServerLauncher'
 	applicationName = 'mydsl-standalone'
 	outputDir = new File(project.buildDir, 'scripts')
-	classpath = jar.outputs.files + project.configurations.runtime
+	classpath = jar.outputs.files + project.configurations.runtimeClasspath
 }
 
 applicationDistribution.into("bin") {
+	duplicatesStrategy "include"
 	from(standaloneStartScript)
 	fileMode = 0755
 }

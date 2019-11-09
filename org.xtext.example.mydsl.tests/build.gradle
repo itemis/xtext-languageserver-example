@@ -1,5 +1,5 @@
 dependencies {
-	compile project(':org.xtext.example.mydsl')
-	testCompile "org.eclipse.xtext:org.eclipse.xtext.testing:${xtextVersion}"
-	testCompile "junit:junit:4.12"
+	implementation project(':org.xtext.example.mydsl')
+	testImplementation "org.eclipse.xtext:org.eclipse.xtext.testing:${xtextVersion}"
+	testImplementation "junit:junit:4.12"
 }

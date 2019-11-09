@@ -1,13 +1,13 @@
 apply plugin: 'application'
 
 dependencies {
-	compile project(':org.xtext.example.mydsl')
-	compile project(':org.xtext.example.mydsl.ide')
-	compile "org.eclipse.xtext:org.eclipse.xtext.ide:${xtextVersion}"
-	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:${xtextVersion}"
-	compile "org.slf4j:slf4j-api:1.7.22"
-	compile "org.slf4j:slf4j-simple:1.6.1"
-	compile "org.java-websocket:Java-WebSocket:1.3.8"
+	implementation project(':org.xtext.example.mydsl')
+	implementation project(':org.xtext.example.mydsl.ide')
+	implementation "org.eclipse.xtext:org.eclipse.xtext.ide:${xtextVersion}"
+	implementation "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:${xtextVersion}"
+	implementation "org.slf4j:slf4j-api:1.7.22"
+	implementation "org.slf4j:slf4j-simple:1.6.1"
+	implementation "org.java-websocket:Java-WebSocket:1.3.8"
 }
 
 // Add a start script for the websocket case
@@ -20,19 +20,20 @@ task standaloneStartScript(type: CreateStartScripts) {
 	mainClassName = 'org.xtext.example.mydsl.websockets.RunWebSocketServer'
 	applicationName = 'mydsl-websocket'
 	outputDir = new File(project.buildDir, 'scripts')
-	classpath = jar.outputs.files + project.configurations.runtime
+	classpath = jar.outputs.files + project.configurations.runtimeClasspath
 	
 }
 
 applicationDistribution.into("bin") {
+	duplicatesStrategy "include"
 	from(standaloneStartScript)
 	fileMode = 0755
 }
 
 jar {
-    manifest {
-        attributes 'Implementation-Title': 'Websocket',
-                   'Implementation-Version': version,
-                   'Main-Class': 'org.xtext.example.mydsl.websockets.RunWebSocketServer'
-    }
+	manifest {
+		attributes	'Implementation-Title': 'Websocket',
+					'Implementation-Version': archiveVersion,
+					'Main-Class': 'org.xtext.example.mydsl.websockets.RunWebSocketServer'
+	}
 }

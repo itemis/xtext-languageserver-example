@@ -4,7 +4,6 @@ dependencies {
 	implementation project(':org.xtext.example.mydsl')
 	implementation project(':org.xtext.example.mydsl.ide')
 	implementation "org.eclipse.xtext:org.eclipse.xtext.ide:${xtextVersion}"
-	implementation "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:${xtextVersion}"
 	implementation "org.slf4j:slf4j-api:1.7.22"
 	implementation "org.slf4j:slf4j-simple:1.6.1"
 	implementation "org.eclipse.lsp4j:org.eclipse.lsp4j.websocket"

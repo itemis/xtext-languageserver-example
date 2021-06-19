@@ -3,7 +3,6 @@ apply plugin: 'application'
 dependencies {
 	implementation project(':org.xtext.example.mydsl')
 	implementation "org.eclipse.xtext:org.eclipse.xtext.ide:${xtextVersion}"
-	implementation "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:${xtextVersion}"
 }
 
 // Add a start script for the socket case

@@ -1,10 +1,6 @@
 buildscript {
 	repositories {
 		mavenCentral()
-<<<<<<< HEAD
-=======
-		jcenter()
->>>>>>> 50f13d1 (update to 2.21)
 		maven {
 			url "https://plugins.gradle.org/m2/"
 		}
